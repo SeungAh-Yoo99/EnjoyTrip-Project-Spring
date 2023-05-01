@@ -34,7 +34,7 @@ public class SwaggerConfiguration {
 		builder = builder.apis(RequestHandlerSelectors.basePackage("com.mvc.controller"));
 		
 		// paths(): api()로 선택된 api 중 특정 path 조건에 맞는 api들을 다시 필터링하여 문서화 함
-		builder = builder.paths(PathSelectors.ant("/**/customers/**"));
+		builder = builder.paths(PathSelectors.ant("/**/user/**"));
 		
 		docket = builder.build(); // 문서 생성
 		docket = docket.apiInfo(info()); // 추가적 정보 포함

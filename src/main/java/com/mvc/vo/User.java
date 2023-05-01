@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Car {
-	private String num;
-	private String name;
-	private String address;
-	
-
+public class User {
+    String id;
+    String pw;
+    String name;
+    String role;
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper file : query가 들어 있음 -->
+<mapper namespace="com.mvc.mapper.UserMapper">
+
+	<insert id="join" parameterType="User">
+		insert into user values(#{id}, #{pw}, #{name}, #{role})
+	</insert>
+
+	<update id="modify" parameterType="User">
+		update user set name = #{name}, role = #{role} where id = #{id}
+	</update>
+
+	<select id="search" parameterType="string" resultType="User" >
+		select * from user where id = #{id}
+	</select>
+
+	<delete id="withdraw" parameterType="string">
+		delete from user where id = #{id}
+	</delete>
+
+	<select id="login" resultType="User" parameterType="User">
+		select * from user where id = #{id} and pw = #{pw}
+	</select>
+
+	<update id="newPw" parameterType="User">
+		update user set pw = #{pw} where id = #{id}
+	</update>
+</mapper>
