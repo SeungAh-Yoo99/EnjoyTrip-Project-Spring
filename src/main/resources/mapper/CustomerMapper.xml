@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper file : query가 들어 있음 -->
+<mapper namespace="com.mvc.mapper.CustomerMapper">
+
+	<select id="selectAll" resultType="Customer">
+		select * from customer order by num desc
+	</select>
+	
+	<select id="selectOne" parameterType="string" resultType="Customer" >
+        select * from customer where num = #{num}
+    </select>
+
+	<insert id="insert" parameterType="Customer">
+		insert into customer values(#{num}, #{name}, #{address}) 
+	</insert>
+	
+	<update id="modify" parameterType="Customer">
+    	update customer set num =#{num} , name = #{name}, address = #{address} where num = #{num}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete from customer where num = #{num}
+	</delete>
+	
+	<select id="findByAddress" resultType="Customer" parameterType="string">
+		select * from customer where address = #{address}
+	</select>
+	
+</mapper>
