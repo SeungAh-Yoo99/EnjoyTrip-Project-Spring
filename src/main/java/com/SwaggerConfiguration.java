@@ -44,8 +44,8 @@ public class SwaggerConfiguration {
 	
 	private ApiInfo info() {
 		ApiInfoBuilder b = new ApiInfoBuilder();
-		b = b.title("EnjoyTrip API");
-		b = b.description("<h3>EnjoyTrip</h3>EnjoyTrip API<br><img src=image/f2.jpg width=150>");
+		b = b.title("EnjoyTrip API - 김선형, 유승아");
+		b = b.description("<img src=image/kimsunhyungZZANG.jpeg width=150>");
 		b = b.version("1.0");
 		ApiInfo ai = b.build();
 		
