@@ -30,8 +30,8 @@ public class UserController {
 
     @PutMapping(value = "/user/modify")
     @ApiOperation(notes="회원 정보 수정", value="User 객체 수정")
-    public Map<String, String> modify(@RequestBody User user) throws Exception {
-        int x = service.modify(user);
+    public Map<String, String> modify(HttpSession session) throws Exception {
+        int x = service.modify((User)session.getAttribute("user"));
 
         Map<String, String> map = new HashMap<>();
         if(x >= 1) map.put("result", "modify success!");
@@ -41,13 +41,18 @@ public class UserController {
 
     @GetMapping(value = "/user/{id}")
     @ApiOperation(notes="회원 정보 조회", value="User 객체 조회")
-    public User search(@PathVariable String id) throws Exception {
-        return service.search(id);
+    public User search(@PathVariable String id, HttpSession session) throws Exception {
+    	User sessionUser = (User)session.getAttribute("user");
+    	if(sessionUser.getId().equals(id) || sessionUser.getRole().equals("admin")) return service.search(id);
+    	else throw new Exception();
     }
 
     @DeleteMapping(value = "/user/{id}")
     @ApiOperation(notes="회원 탈퇴", value="User 객체 삭제")
-    public Map<String, String> withdraw(@PathVariable String id) throws Exception {
+    public Map<String, String> withdraw(@PathVariable String id, HttpSession session) throws Exception {
+    	User sessionUser = (User)session.getAttribute("user");
+    	if(!sessionUser.getId().equals(id) && !sessionUser.getRole().equals("admin")) throw new Exception();
+    	
         int x = service.withdraw(id);
 
         Map<String, String> map = new HashMap<>();
@@ -67,7 +72,7 @@ public class UserController {
             return map;
         }
 
-        session.setAttribute("loginUser", u);
+        session.setAttribute("user", u);
         map.put("result", "login success");
         return map;
 	}
@@ -82,10 +87,12 @@ public class UserController {
         return map;
     }
 
-    @GetMapping(value = "/user/findPw/{id}")
+    @GetMapping(value = "/user/findPw")
     @ApiOperation(notes="비밀번호 찾기", value="비밀번호 찾기")
-    public Map<String, String> findPw (@PathVariable String id, @RequestBody Map<String, String> rb) throws Exception{
-        User user = service.search(id);
+    public Map<String, String> findPw (@RequestBody Map<String, String> rb, HttpSession session) throws Exception{
+    	User sessionUser = (User)session.getAttribute("user");
+    	
+        User user = service.search(sessionUser.getId());
         user.setPw(rb.get("pw"));
         int x = service.newPw(user);
 
