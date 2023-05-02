@@ -39,21 +39,21 @@ public class UserController {
         return map;
     }
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "/user")
     @ApiOperation(notes="회원 정보 조회", value="User 객체 조회")
-    public User search(@PathVariable String id, HttpSession session) throws Exception {
+    public User search(HttpSession session) throws Exception {
     	User sessionUser = (User)session.getAttribute("user");
-    	if(sessionUser.getId().equals(id) || sessionUser.getRole().equals("admin")) return service.search(id);
+    	if(sessionUser != null) return service.search(sessionUser.getId());
     	else throw new Exception();
     }
 
-    @DeleteMapping(value = "/user/{id}")
+    @DeleteMapping(value = "/user")
     @ApiOperation(notes="회원 탈퇴", value="User 객체 삭제")
-    public Map<String, String> withdraw(@PathVariable String id, HttpSession session) throws Exception {
+    public Map<String, String> withdraw(HttpSession session) throws Exception {
     	User sessionUser = (User)session.getAttribute("user");
-    	if(!sessionUser.getId().equals(id) && !sessionUser.getRole().equals("admin")) throw new Exception();
+    	if(sessionUser == null) throw new Exception();
     	
-        int x = service.withdraw(id);
+        int x = service.withdraw(sessionUser.getId());
 
         Map<String, String> map = new HashMap<>();
         if(x >= 1) map.put("result", "withdraw success!");
