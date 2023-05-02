@@ -84,9 +84,9 @@ public class UserController {
 
     @GetMapping(value = "/user/findPw/{id}")
     @ApiOperation(notes="비밀번호 찾기", value="비밀번호 찾기")
-    public Map<String, String> findPw (@PathVariable String id, @RequestBody String pw) throws Exception{
+    public Map<String, String> findPw (@PathVariable String id, @RequestBody Map<String, String> rb) throws Exception{
         User user = service.search(id);
-        user.setPw(pw);
+        user.setPw(rb.get("pw"));
         int x = service.newPw(user);
 
         Map<String, String> map = new HashMap<>();
