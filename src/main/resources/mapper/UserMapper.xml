@@ -11,7 +11,7 @@
 	</insert>
 
 	<update id="modify" parameterType="User">
-		update user set name = #{name}, role = #{role} where id = #{id}
+		update user set name = #{name}, pw = #{pw}, role = #{role} where id = #{id}
 	</update>
 
 	<select id="search" parameterType="string" resultType="User" >

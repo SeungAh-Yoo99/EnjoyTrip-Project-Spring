@@ -30,8 +30,13 @@ public class UserController {
 
     @PutMapping(value = "/user/modify")
     @ApiOperation(notes="회원 정보 수정", value="User 객체 수정")
-    public Map<String, String> modify(HttpSession session) throws Exception {
-        int x = service.modify((User)session.getAttribute("user"));
+    public Map<String, String> modify(@RequestBody User user, HttpSession session) throws Exception {
+    	User sessionUser = (User)session.getAttribute("user");
+    	sessionUser.setPw(user.getPw());
+    	sessionUser.setName(user.getName());
+    	sessionUser.setRole(user.getRole());
+    	
+        int x = service.modify(sessionUser);
 
         Map<String, String> map = new HashMap<>();
         if(x >= 1) map.put("result", "modify success!");
