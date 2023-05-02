@@ -5,5 +5,7 @@
 
 <!-- mapper file : query가 들어 있음 -->
 <mapper namespace="com.mvc.mapper.AttractionMapper">
-
+	<select id="selectBySidoCode" parameterType="string" resultType="Attraction">
+		select * from attraction_info where sido_code=#{sido_code}
+	</select>
 </mapper>
