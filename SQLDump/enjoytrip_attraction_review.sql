@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `attraction_review`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `attraction_review` (
   `review_id` varchar(45) NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   `content_id` int NOT NULL,
   `review content` varchar(1000) DEFAULT NULL,
   `image` varchar(45) DEFAULT NULL,
