@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `attraction_like`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `attraction_like` (
   `content_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   PRIMARY KEY (`content_id`,`user_id`),
   KEY `fk_attraction_info_has_user_user1_idx` (`user_id`),
   KEY `fk_attraction_info_has_user_attraction_info1_idx` (`content_id`),
