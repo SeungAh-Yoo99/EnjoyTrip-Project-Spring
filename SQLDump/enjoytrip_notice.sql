@@ -28,7 +28,7 @@ CREATE TABLE `notice` (
   `notice_id` int NOT NULL,
   `creation_date` datetime DEFAULT NULL,
   `content` varchar(1000) DEFAULT NULL,
-  `user_id` int NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   PRIMARY KEY (`notice_id`),
   KEY `fk_notice_user1_idx` (`user_id`),
   CONSTRAINT `fk_notice_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
