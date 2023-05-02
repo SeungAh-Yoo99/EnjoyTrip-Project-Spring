@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `attraction_course`;
 CREATE TABLE `attraction_course` (
   `course_id` int NOT NULL,
   `course_name` varchar(45) DEFAULT NULL,
-  `user_id` int NOT NULL,
+  `user_id` varchar(20) NOT NULL,
   PRIMARY KEY (`course_id`),
   KEY `fk_attraction_course_user1_idx` (`user_id`),
   CONSTRAINT `fk_attraction_course_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
